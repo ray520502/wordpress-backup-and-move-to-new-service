@@ -1,0 +1,43 @@
+wordpress搬迁基本操作：
+step1:
+	wordpress安装backWPup插件（免费），使用backWPup完整备份wordpress；
+	
+step2：登录phpmyadmin备份数据库
+	登录phpmyadmin，点选wordpress（对应数据库），点选导出>执行，导出.sql文件
+	
+step3：修改数据库内新服务器ip、host、domain等信息
+	用文档编辑器（如：Notepad++）打开.sql数据库备份文件，ctrl+F搜索所有并替换ip、host、domain信息
+	
+step4：新服务器租赁并配置lamp（lnmp）
+	参考lamp配置方法
+	
+step5：新服务器新建数据库、数据库用户名、数据库密码
+	参考lamp配置方法
+	
+step6：登录新服务phpmyadmin导入备份修改后的.sql文件
+
+step7：用FTP软件（如：FileZillaClient）登录服务器，上传wordpress备份压缩文件。解压到/var/www/html/ 文件夹下，并改好网站根目录文件夹名
+
+step8：设置根目录用户组权限
+	参考lamp配置方法
+	
+step9：修改wordpress 内wp-config文件
+	/** WordPress 数据库的名称 */
+
+	define('DB_NAME', '你的新空间数据库名称');
+
+	/** MySQL 数据库用户名 */
+
+	define('DB_USER', '你的数据库用户名');
+
+	/** MySQL 数据库密码 */
+
+	define('DB_PASSWORD', '你的数据库登录密码');
+
+	/** MySQL 主机 */
+
+	define('DB_HOST', '你的数据库地址');
+	
+step10：重启apache
+	service apache2 restart
+	
